@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Руководство по установке и обновлению SMF 2.1</title>
+	<link rel="stylesheet" href="Themes/default/css/index.css?fin20"/>
+	<style>
+		#main_screen {
+			padding: 0 40px;
+		}
+		#main_screen h2 {
+			font-size: 2em;
+			border-bottom: solid 1px #d05800;
+			line-height: 2em;
+			margin: 0 0 0.5em 0;
+			color: #d05800;
+		}
+		h3 {
+			color: #d05800;
+		}
+		#main_content_section .panel {
+			padding: 1em 2em 1em 1em;
+			line-height: 1.6em;
+		}
+		#main_content_section h2 {
+			font-size: 1.5em;
+			border-bottom: solid 1px #d05800;
+			line-height: 1.5em;
+			margin: 0 2em 0.5em 0;
+			color: #d05800;
+		}
+		#main_content_section li {
+			line-height: 1.6em;
+			font-weight: bold;
+			color: #555;
+		}
+		#main_content_section li ul	{
+			padding-bottom: 0.7em;
+		}
+		#main_content_section li li {
+			font-weight: normal;
+			line-height: 1.6em;
+		}
+		.tt {
+			font-weight: bold;
+			font-style: italic;
+			letter-spacing: 0.5px;
+		}
+		dt {
+			font-weight: bold;
+			color: #555;
+			margin-bottom: .1em;
+		}
+		dl {
+			margin-top: .2em;
+			margin-left: 2em;
+			margin-bottom: .5em;
+		}
+		dd {
+			line-height: 1.5em;
+			margin-left: 2em;
+			margin-bottom: .1em;
+		}
+		#main_content_section ul, #main_content_section ol {
+			padding-left: 2em;
+			list-style: disc;
+		}
+		#main_content_section ul ul, #main_content_section ol ol {
+			list-style: circle;
+		}
+		#footer {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="footerfix">
+		<div id="header">
+			<h1 class="forumtitle">Руководство по установке и обновлению SMF 2.1</h1>
+			<img id="smflogo" src="Themes/default/images/smflogo.svg" alt="Simple Machines Forum" title="Simple Machines Forum"/>
+		</div>
+		<div id="wrapper">
+			<div id="upper_section" class="middletext" style="overflow: hidden;">
+				<div id="inner_section">
+					<a href="javascript:void(0)" class="button" onclick="document.getElementById('install_guide').classList.remove('hidden');document.getElementById('upgrade_guide').classList.add('hidden');">Руководство по установке</a>
+					<a href="javascript:void(0)" class="button" onclick="document.getElementById('install_guide').classList.add('hidden');document.getElementById('upgrade_guide').classList.remove('hidden');">Руководство по обновлению</a>
+				</div>
+			</div>
+			<div id="main_content_section">
+				<div id="install_guide">
+					<div class="panel">
+						<h2 id="i_contents">Установка вашего форума</h2>
+						<p>Спасибо, что решили использовать или хотя бы попробовать <a href="https://simplemachines.org/about/" target="_blank" rel="noopener">SMF</a>. Прежде чем вы начнете, пожалуйста, помните, что на <a href="https://www.simplemachines.org/community/index.php">форуме поддержки</a> могут помочь с возникшими во время установки проблемами. Обязательно загляните на <a href="https://www.simplemachines.ru/index.php">форум русскоязычного сообщества SMF</a> — на многие вопросы там уже даны ответы.</p>
+						<p>В этом файле вы можете найти следующую информацию:</p>
+						<ul style="list-style-type: none;">
+							<li>&raquo; <a href="#i_recommendations">Рекомендации по наилучшей производительности</a></li>
+							<li>&raquo; <a href="#i_uploadingftp">Способ загрузки файлов 1: Загрузка файлов вручную</a></li>
+							<li>&raquo; <a href="#i_Set_File_Permissions">Установка прав доступа к файлам</a></li>
+							<li>&raquo; <a href="#i_Create_a_Database_and_a_Database_User">Создание базы данных и пользователя базы данных</a></li>
+							<li>&raquo; <a href="#i_Run_the_installer">Запуск скрипта установки</a></li>
+							<li>&raquo; <a href="#i_finishing">Завершение установки и очистка временных файлов.</a></li>
+						</ul>
+					</div>
+					<div class="panel">
+						<h2 id="i_recommendations">Рекомендации по наилучшей производительности</h2>
+						<ul>
+							<li>Windows, <a href="https://www.linux.org/" target="_blank" rel="noopener">Linux</a> или другая операционная система на базе Unix.</li>
+							<li><a href="https://httpd.apache.org/" target="_blank" rel="noopener">Apache</a> 2.0.0 или выше с <a href="https://httpd.apache.org/docs-2.0/mod/core.html#acceptpathinfo" target="_blank" rel="noopener">AcceptPathInfo</a>, установленным в значение On (Apache 2 и выше) для поддержки ЧПУ-адресов.</li>
+							<li>
+								<a href="https://php.net" target="_blank" rel="noopener">PHP</a> 7.2.0 или выше, со следующими настройками в php.ini:
+								<ul>
+									<li>Параметр <a href="https://php.net/manual/ru/info.configuration.php#ini.max-input-time" target="_blank" rel="noopener">max_input_time</a> имеет значение не ниже 30.</li>
+									<li>Параметры <a href="https://php.net/manual/ru/ini.core.php#ini.post-max-size" target="_blank" rel="noopener">post_max_size</a> и <a href="https://php.net/configuration.directives#ini.upload-max-filesize" target="_blank" rel="noopener">upload_max_filesize</a> равны наибольшим размерам вложений, которые вы хотите разрешить загружать.</li>
+									<li>Параметр <a href="https://php.net/session#ini.session.use-trans-sid" target="_blank" rel="noopener">session.use_trans_sid</a> установлен в значение Off.</li>
+									<li>Параметр <a href="https://php.net/manual/ru/ini.core.php#ini.memory-limit" target="_blank" rel="noopener">memory_limit</a> имеет значение как минимум 8M.</li>
+									<li>Параметр <a href="https://php.net/manual/ru/info.configuration.php#ini.max-execution-time" target="_blank" rel="noopener">max_execution_time</a> имеет значение как минимум 15.</li>
+									<li>Параметр <a href="https://php.net/manual/ru/ini.core.php#ini.register-globals" target="_blank" rel="noopener">register_globals</a> установлен в значение Off.</li>
+									<li>Параметр <a href="https://php.net/manual/ru/features.safe-mode.php" target="_blank" rel="noopener">safe mode</a> выключен или <a href="https://httpd.apache.org/docs/2.0/suexec.html" target="_blank" rel="noopener">suEXEC</a> включен.</li>
+								</ul>
+							</li>
+							<li>Любая из следующих систем баз данных
+								<ul>
+									<li><a href="https://www.mysql.com/" target="_blank" rel="noopener">MySQL</a> 8.0 или выше.</li>
+									<li><a href="https://mariadb.com/" target="_blank" rel="noopener">MariaDB</a> 10.2 или выше.</li>
+									<li><a href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL</a> 9.6 или выше.</li>
+								</ul>
+							</li>
+							<li><a href="https://libgd.github.io/" target="_blank" rel="noopener">GD Graphics Library</a> 2.0 или выше.</li>
+						</ul>
+						<p>Если ваш сервер не соответствует этим требованиям, SMF может работать некорректно.</p>
+					</div>
+					<div class="panel">
+						<h2 id="i_uploadingftp">Загрузка файлов вручную</h2>
+						<p>Первое, что вам нужно сделать, это загрузить все файлы в этом пакете, исключая сам этот файл, на ваш сервер. Вы можете загрузить его в любой каталог, доступный по URL-адресу, но если вы не уверены, куда его поместить, то подкаталог с именем «forum» - это хороший выбор. Убедитесь, что все папки были загружены, особенно <span class="tt">Themes/default/languages</span>.</p>
+						<h3>Языковые файлы</h3>
+						<p>Если вы используете дополнительные языки, то будет полезно загрузить также обновленные версии языковых файлов вместе с пакетами обновления. При этом все обновленные текстовые строки будут отображаться правильно после обновления и позволят выполнить обновление на выбранном вами языке.</p>
+					</div>
+					<div class="panel">
+						<h2 id="i_Set_File_Permissions">Установка прав доступа к файлам</h2>
+						<p>После того как установочный архив будет загружен и извлечен, вам необходимо установить права доступа к файлам. Обычно это делается с помощью утилиты Unix <strong>CHMOD</strong>. Правильное значение CHMOD для SMF-файлов — 777, 775 или 755, в зависимости от вашего хостинга. Существует два метода для этого шага, используемый метод зависит от хостинга, который вы используете.</p>
+						<h3>Настройка прав доступа к файлам с помощью установщика</h3>
+						<p>Установщик SMF поможет установить права доступа к файлам. Переход к каталогу, в котором находится SMF, должен перенаправить вас на файл install.php, с запуском скрипта установки. Например: www.yourdomain.com/forum/install.php. Если установщик обнаружит файлы, которые нуждаются в изменении их разрешений, он запросит сведения о доступе к FTP, чтобы с помощью <strong>CHMOD</strong> изменить файлы, необходимые для установки. Это может не работать на некоторых серверах.
+						</p>
+						<h3>Настройка прав доступа к файлам с помощью FTP</h3>
+						<p>Используя панель управления или FTP-клиент, права доступа к файлам можно быстро и легко изменить. Как правило, FTP программы позволяют изменять разрешения путем нажатия правой кнопкой мыши на файле/каталоге. В появившемся диалоговом окне можно ввести желаемое числовое значение или, если это предусмотрено, переключить флажки.</p>
+						<p>Следующие файлы и каталоги должны быть доступны для записи. В зависимости от того, как настроен ваш сервер, это может означать, что они должны иметь <strong>CHMOD</strong> значения 644, 664 или 666 для файлов, и 755, 775 или 777 для папок:</p>
+						<ul><li>/attachments
+						</li><li>/avatars
+						</li><li>/cache
+						</li><li>/custom_avatar
+						</li><li>/Packages
+						</li><li>/Smileys
+						</li><li>/Themes
+						</li><li>/Themes/default/languages/Install.english.php
+						</li><li>agreement.txt
+						</li><li>db_last_error.php
+						</li><li>Settings.php
+						</li><li>Settings_bak.php
+						</li><li>install.php
+						</li></ul>
+						<p>Если разрешение на ваши файлы или папки не делает их доступными для записи, установщик SMF сообщит о проблеме. В этом случае используйте FTP-клиент или панель хоста для сброса разрешений для файлов или папок, о которых сообщает установщик.</p>
+					</div>
+					<div class="panel">
+						<h2 id="i_Create_a_Database_and_a_Database_User">Создание базы данных и пользователя базы данных</h2>
+						<p>Перед запуском программы установки необходимо создать базу данных и пользователя базы данных. В базе данных будет храниться вся информация, необходимая форуму, такая как участники, сообщения и темы. Пользователь базы данных позволит форуму получить доступ к хранимой информации. Запомните эту информацию о базе данных и пользователе базы данных. Она понадобится вам, когда придёт время запуска программы установки.</p>
+						<h3>Создание базы данных с помощью PHPMyAdmin</h3>
+						<p>Если опция создания баз данных через PHPMyAdmin доступна на используемом вами хостинге, то базу данных можно создать с домашней страницы PHPMyAdmin.</p>
+						<h3>Создание базы данных с помощью панели управления</h3>
+						<p>Если ваш хостер предоставляет интерфейс панели управления, то это может быть использовано для создания базы данных.</p><p>SMF начиная с версии 2.0 имеет возможность поддерживать другие типы баз данных, включая PostgreSQL. SMF 1.1 поддерживает только MySQL.</p>
+						<h3>Создание пользователя базы данных</h3>
+						<p>Пользователь базы данных может быть создан через панель управления, предоставляемую вашим хостером.</p>
+						<p>Пользователю базы данных требуются следующие разрешения: SELECT, INSERT, UPDATE, DELETE, ALTER и INDEX. При желании могут быть выданы дополнительные разрешения.</p>
+					</div>
+					<div class="panel">
+						<h2 id="i_Run_the_installer">Запуск установщика</h2>
+						<p>Последним шагом в установке SMF является запуск программы установки. Информация, полученная на предыдущих этапах, будет использована в процессе установки.</p>
+						<p>Первая страница, которую вы видите, может запросить информацию о вашем FTP. Если вы видите этот экран, то это потому, что программа установки нашла некоторые файлы или папки с недостаточными разрешениями для корректной работы SMF. Если вы введете здесь информацию о вашем FTP, программа установки автоматически исправит эти разрешения для вас. Обратите внимание, что путь должен быть тем же самым, что вы видите в вашем FTP-клиенте. Например, это может быть &quot;public_html/forum&quot;. И помните, что программа установки нигде не сохранит ваш FTP-пароль..</p>
+						<p>Экран установки SMF выглядит по-разному для SMF 2.1 и SMF 1.1, однако обе они всё ещё требуют одну и ту же информацию. Перейдя в каталог, где расположен SMF, следует перенаправить вас в файл install.php и предложить программе установки запуститься. Например: www.yourdomain.com/forum/install.php</p>
+						<h3>Основные настройки форума</h3>
+						<dl>
+							<dt>Название форума</dt>
+							<dd>Название устанавливаемого форума должно идти здесь. По умолчанию установлено значение «Название вашего форума». При необходимости это можно изменить позже в разделе настроек сервера.</dd>
+							<dt>URL-адрес форума</dt>
+							<dd>URL-адрес, по которому можно найти форум, без завершающей косой черты. Установщик SMF, скорее всего, определит его правильно, поэтому безопасно оставить это поле в покое.</dd>
+							<dt>Поддержка Gzip</dt>
+							<dd>Вывод в gzip может быть использован для экономии пропускной способности и сделать загрузку страниц быстрее.</dd>
+							<dt>Сессии базы данных</dt>
+							<dd>Сеансы могут храниться в базе данных или в файлах. Сессии баз данных более надежны, безопасны и могут лучше работать на сайтах с несколькими серверами.</dd>
+							<dt>Набор символов UTF-8</dt>
+							<dd>Наборы символов UTF-8 полезны для международных форумов или форумов, использующих языки, отличные от английского.</dd>
+							<dt>Разрешить сбор статистики</dt>
+							<dd>Эта опция позволяет Simple Machines анонимно собирать статистику с вашего форума, чтобы программное обеспечение могло развиваться в соответствии с потребностями пользователей.</dd>
+						</dl>
+						<h3>Настройки сервера базы данных</h3>
+						<dl>
+							<dt>Тип базы данных</dt>
+							<dd>Здесь можно выбрать схему базы данных, из списка поддерживаемых вашим сервером. Рекомендуется MySQL и PostgreSQL.</dd>
+							<dt>Имя сервера</dt>
+							<dd>Здесь указывается местоположение базы данных. В 99% случаев это будет localhost.</dd>
+							<dt>Имя пользователя</dt>
+							<dd>Имя пользователя, используемое для пользователя базы данных, должно быть размещено здесь. Если для этого требуется помощь, необходимо связаться с хостинг-провайдером.</dd>
+							<dt>Пароль</dt>
+							<dd>Здесь вводится пароль пользователя базы данных.</dd>
+							<dt>Имя базы данных</dt>
+							<dd>Имя, используемое для базы данных, должно быть размещено здесь. Если для этого требуется помощь, необходимо связаться с хостинг-провайдером.</dd>
+							<dt>Префикс базы данных</dt>
+							<dd>Здесь указывается префикс для всех таблиц, связанных с этой установкой. Уникальные префиксы позволяют нескольким приложениям или установщику SMF безопасно использовать одну и ту же базу данных.</dd>
+						</dl>
+						<h3>Создание учётной записи администратора</h3>
+						<p>Программа установки SMF запросит информацию для создания учётной записи администратора форума. Эта информация включает в себя имя пользователя, пароль и адрес электронной почты. Используйте этот аккаунт для входа в админку, для управления и настройки форума.</p>
+					</div>
+					<div class="panel">
+						<h2 id="i_finishing">Завершение установки</h2>
+						<p>После того, как все шаги процесса установки будут завершены, установите флажок, чтобы удалить установочные файлы с сервера. Если это не сработает, их нужно будет удалить через FTP. Все установочные файлы должны быть удалены с сервера после завершения процесса установки, так как они представляют собой серьезную угрозу безопасности, если их оставить на сервере без присмотра. После установки SMF они больше не нужны.</p>
+						<p>Удачи!<br />
+						Simple Machines</p>
+					</div>
+				</div>
+				<div id="upgrade_guide" class="hidden">
+					<div class="panel">
+						<h2 id="u_contents">Обновление вашего форума</h2>
+						<p>Спасибо, что решили перейти на <a href="https://simplemachines.org/about/" target="_blank" rel="noopener">SMF</a>. Прежде чем вы начнете, пожалуйста, помните, что на <a href="https://www.simplemachines.org/community/index.php">форуме поддержки</a> могут помочь с возникшими во время установки проблемами. Обязательно загляните на <a href="https://www.simplemachines.ru/index.php">форум русскоязычного сообщества SMF</a> — на многие вопросы там уже даны ответы.</p>
+						<p>В этом файле вы можете найти следующую информацию:</p>
+						<ul style="list-style-type: none;">
+							<li>&raquo; <a href="#u_recommendations">Рекомендации по наилучшей производительности</a></li>
+							<li>&raquo; <a href="#u_backups">Резервное копирование данных</a></li>
+							<li>&raquo; <a href="#u_uploadingftp">Метод загрузки файлов 1: с использованием FTP</a></li>
+							<li>&raquo; <a href="#u_Set_File_Permissions">Установка прав доступа к файлам</a></li>
+							<li>&raquo; <a href="#u_Run_the_upgrading_tool">Запуск скрипта обновления</a></li>
+							<li>&raquo; <a href="#u_finishing">Завершение обновления и очистка временных файлов</a></li>
+						</ul>
+					</div>
+					<div class="panel">
+						<h2 id="u_recommendations">Рекомендации по наилучшей производительности</h2>
+						<ul>
+							<li>Windows, <a href="https://www.linux.org/" target="_blank" rel="noopener">Linux</a> или другая операционная система на базе Unix.</li>
+							<li><a href="https://httpd.apache.org/" target="_blank" rel="noopener">Apache</a> 2.0.0 или выше с <a href="https://httpd.apache.org/docs-2.0/mod/core.html#acceptpathinfo" target="_blank" rel="noopener">AcceptPathInfo</a>, установленным в значение On (Apache 2 и выше) для поддержки ЧПУ-адресов.</li>
+							<li>
+								<a href="https://php.net" target="_blank" rel="noopener">PHP</a> 7.2.0 или выше, со следующими настройками в php.ini:
+								<ul>
+									<li>Параметр <a href="https://php.net/manual/ru/info.configuration.php#ini.max-input-time" target="_blank" rel="noopener">max_input_time</a> имеет значение не ниже 30.</li>
+									<li>Параметры <a href="https://php.net/manual/ru/ini.core.php#ini.post-max-size" target="_blank" rel="noopener">post_max_size</a> и <a href="https://php.net/configuration.directives#ini.upload-max-filesize" target="_blank" rel="noopener">upload_max_filesize</a> равны наибольшим размерам вложений, которые вы хотите разрешить загружать.</li>
+									<li>Параметр <a href="https://php.net/session#ini.session.use-trans-sid" target="_blank" rel="noopener">session.use_trans_sid</a> установлен в значение Off.</li>
+									<li>Параметр <a href="https://php.net/manual/ru/ini.core.php#ini.memory-limit" target="_blank" rel="noopener">memory_limit</a> имеет значение как минимум 8M.</li>
+									<li>Параметр <a href="https://php.net/manual/ru/info.configuration.php#ini.max-execution-time" target="_blank" rel="noopener">max_execution_time</a> имеет значение как минимум 15.</li>
+									<li>Параметр <a href="https://php.net/manual/ru/ini.core.php#ini.register-globals" target="_blank" rel="noopener">register_globals</a> установлен в значение Off.</li>
+									<li>Параметр <a href="https://php.net/manual/ru/features.safe-mode.php" target="_blank" rel="noopener">safe mode</a> выключен или <a href="https://httpd.apache.org/docs/2.0/suexec.html" target="_blank" rel="noopener">suEXEC</a> включен.</li>
+								</ul>
+							</li>
+							<li>Любая из следующих систем баз данных
+								<ul>
+									<li><a href="https://www.mysql.com/" target="_blank" rel="noopener">MySQL</a> 8.0 или выше.</li>
+									<li><a href="https://mariadb.com/" target="_blank" rel="noopener">MariaDB</a> 10.2 или выше.</li>
+									<li><a href="https://www.postgresql.org/" target="_blank" rel="noopener">PostgreSQL</a> 9.6 или выше.</li>
+								</ul>
+							</li>
+							<li><a href="https://libgd.github.io/" target="_blank" rel="noopener">GD Graphics Library</a> 2.0 или выше.</li>
+						</ul>
+						<p>Если ваш сервер не соответствует этим требованиям, SMF может работать некорректно.</p>
+					</div>
+					<div class="panel">
+						<h2 id="u_backups">Резервное копирование данных</h2>
+						<p>Перед началом процесса обновления необходимо сделать резервную копию действующей базы данных. Это защищает форум от случайного повреждения и любых проблем с обновлением. Несмотря на то, что все шаги предпринимаются и проводится обширное тестирование, иногда возникают проблемы. Поэтому наличие резервной копии имеет решающее значение. Средство обновления может создавать резервные копии всех таблиц базы данных перед запуском, однако лучше всего иметь полную резервную копию. </p>
+						<h3>Резервное копирование базы данных с помощью PHPMyAdmin</h3>
+						<p>phpMyAdmin дает возможность экспортировать базу данных, на начальной странице выберите опцию «Экспорт» и следуйте инструкциям. Выберите свою базу данных SMF. Они различаются в зависимости от хоста. </p>
+						<h3>Резервное копирование базы данных с помощью панели управления</h3>
+						<p>Если ваш хостинг предоставляет интерфейс панели управления, он может быть использован для резервного копирования базы данных. Выбор параметров «Резервное копирование» или «Мастер резервного копирования» должен привести вас на страницу, предлагающую создать резервную копию базы данных. При использовании разных хостов эти параметры могут иметь разные названия. </p>
+					</div>
+					<div class="panel">
+						<h2 id="u_uploadingftp">Загрузка файлов с использованием FTP</h2>
+						<p>Вы можете использовать FTP - клиент и FTP-доступ для загрузки файлов на ваш сервер.</p>
+						<p>Все, что вам нужно сделать, это загрузить все файлы в этом пакете, за исключением самого этого файла, на ваш сервер. Вы должны загрузить его в тот же каталог, что и предыдущую установку SMF или YaBB SE. Если вам предоставляется возможность «возобновить» загрузку, убедитесь, что вы этого не делаете — вы должны загрузить все файлы. Возможно, вы захотите убедиться, что все файлы были загружены, например, в <span class="tt">Themes/default/languages</span>, потому что некоторые FTP-клиенты, как известно, отбрасывают файлы.</p>
+						<h3>Языковые файлы</h3>
+						<p>Если вы используете дополнительные языки, то будет полезно загрузить также обновленные версии языковых файлов вместе с обновляющими пакетами. При этом все обновленные текстовые строки будут отображаться правильно после обновления и позволят выполнить обновление на выбранном вами языке.</p>
+					</div>
+					<div class="panel">
+						<h2 id="u_Set_File_Permissions">Установка прав доступа к файлам</h2>
+						<p>После того как архив обновления будет загружен и извлечен, вам необходимо установить права доступа к файлам. Обычно это делается с помощью утилиты Unix <strong>CHMOD</strong>. Правильное значение CHMOD для SMF-файлов-777, 775 или 755, в зависимости от вашего хостинга. Существует два метода для этого шага, используемый метод зависит от хостинга, который вы используете.</p>
+						<h3>Настройка прав доступа к файлам с помощью утилиты обновления</h3>
+						<p>Скрипт обновления SMF может легко и просто установить права доступа к файлам. Переход к каталогу, в котором находится SMF, должен перенаправить вас на upgrade.php с запросом на обновление. Например: www.yourdomain.com/forum/upgrade.php. Если апгрейдер обнаружит файлы, которые нуждаются в корректировке их разрешений, он запросит сведения об FTP. Это может не сработать на некоторых серверах.
+						</p>
+						<h3>Настройка прав доступа к файлам с помощью FTP</h3>
+						<p>С помощью панели управления или FTP-клиента права доступа к файлам могут быть изменены быстро и легко. Обычно FTP-программы позволяют изменять разрешения, щелкая правой кнопкой мыши файлы/каталоги и выбирая «Свойства», «Атрибуты» или «Разрешения». Желаемое числовое значение может быть введено или, если оно предусмотрено, флажки могут быть изменены.</p>
+						<p>Следующие файлы и каталоги должны быть доступны для записи. В зависимости от того, как настроен ваш сервер, это может означать, что они должны иметь значения <strong>CHMOD</strong> 644, 664 или 666 для файлов и 755, 775 или 777 для папок:</p>
+						<ul><li>/attachments
+						</li><li>/avatars
+						</li><li>/cache
+						</li><li>/custom_avatar
+						</li><li>/Packages
+						</li><li>/Packages/installed.list
+						</li><li>/Smileys
+						</li><li>/Themes
+						</li><li>agreement.txt
+						</li><li>db_last_error.php
+						</li><li>Settings.php
+						</li><li>Settings_bak.php
+						</li><li>upgrade.php
+						</li></ul>
+						<p>Если разрешение на ваши файлы или папки не делает их доступными для записи, программа обновления SMF сообщит о проблеме. В этом случае используйте FTP-клиент или панель хоста для сброса разрешений для файлов или папок, о которых сообщает программа обновления.</p>
+					</div>
+					<div class="panel">
+						<h2 id="u_Run_the_upgrading_tool">Запуск скрипта обновления</h2>
+						<p>Последний шаг в обновлении SMF — это запуск инструмента обновления. Перейдите в каталог, в котором находится SMF. Вас должно перенаправить на upgrade.php. Пример: www.yourdomain.com/forum/upgrade.php. </p>
+						<p>Первая страница, которую вы видите, может запросить вашу FTP-информацию. Если вы видите этот экран, это происходит потому, что установщик нашел некоторые файлы или папки с недостаточными разрешениями для правильной работы SMF. Если вы введете здесь свою FTP-информацию, установщик может автоматически исправить эти разрешения для вас. Обратите внимание, что путь должен быть таким же, как и в вашем FTP-клиенте. Например, это может быть «public_html/forum». И помните, что установщик нигде не сохранит ваш FTP-пароль.</p>
+						<h3>Параметры обновления</h3>
+						<dl>
+							<dt>Резервное копирование базы данных с префиксом «backup_»</dt>
+							<dd>Выбор этого параметра приведет к тому, что инструмент обновления скопирует все данные в базе данных перед обновлением.</dd>
+							<dt>Режим обслуживания</dt>
+							<dd>При выборе этой опции форум будет переведен в режим обслуживания во время обновления, вместо отображения ошибки. Это настоятельно рекомендуется.</dd>
+							<dt>Вывод дополнительной отладочной информации</dt>
+							<dd>Инструмент обновления может предоставить подробную информацию при выполнении обновления. Используйте этот параметр для предоставления команде поддержки любых ошибок, возникающих во время обновления.</dd>
+						</dl>
+					</div>
+					<div class="panel">
+						<h2 id="u_finishing">Завершение обновления</h2>
+						<p>После завершения всех этапов обновления установите флажок, чтобы удалить файлы обновления с сервера. Если это не сработает, их нужно будет удалить по FTP. Все файлы обновления должны быть удалены с сервера после завершения процесса обновления. К этим файлам относятся upgrade.php и файлы .sql, имя которых начинается с «upgrade». Они представляют собой серьезную угрозу безопасности, если их оставить на сервере без присмотра. Как только SMF был обновлен, они больше не нужны.</p>
+						<p>Удачи!<br />
+						Simple Machines</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<ul>
+			<li class="copyright"><a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0; margin-bottom: 0.7em;" src="https://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</li>
+			<li><a href="https://www.simplemachines.org" target="_blank" rel="noopener">Simple Machines Forum</a></li>
+		</ul>
+	</div>
+</body>
+</html>

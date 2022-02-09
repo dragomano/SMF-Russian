@@ -1,0 +1,70 @@
+{
+    "name": "bugo/smf-russian",
+    "description": "A tool to get a fresh SMF build with Russian localization and some tweaks.",
+    "type": "package",
+    "keywords": ["SMF Russian"],
+    "homepage": "https://github.com/dragomano/SMF-Russian",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bugo",
+            "email": "bugo@dragomano.ru"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/dragomano/SMF-Russian/issues",
+        "source": "https://github.com/dragomano/SMF-Russian"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "simplemachines/smf-install",
+                "version": "2.1.0",
+                "dist": {
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-0_install.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "simplemachines/smf-upgrade",
+                "version": "2.1.0",
+                "dist": {
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-0_upgrade.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "simplemachines/smf-russian",
+                "version": "2.1.0",
+                "dist": {
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-0_russian.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
+    "require-dev": {
+        "simplemachines/smf-install": "^2.1",
+        "simplemachines/smf-upgrade": "^2.1",
+        "simplemachines/smf-russian": "^2.1",
+        "nelexa/zip": "^4.0"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "npm install",
+            "npx mix",
+            "@php create_packages.php"
+        ],
+        "post-update-cmd": [
+            "composer run-script post-install-cmd"
+        ]
+    },
+    "prefer-stable": true
+}
