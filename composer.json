@@ -20,9 +20,9 @@
             "type": "package",
             "package": {
                 "name": "simplemachines/smf-install",
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "dist": {
-                    "url": "https://download.simplemachines.org/index.php/smf_2-1-0_install.zip",
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-1_install.zip",
                     "type": "zip"
                 }
             }
@@ -31,9 +31,9 @@
             "type": "package",
             "package": {
                 "name": "simplemachines/smf-upgrade",
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "dist": {
-                    "url": "https://download.simplemachines.org/index.php/smf_2-1-0_upgrade.zip",
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-1_upgrade.zip",
                     "type": "zip"
                 }
             }
@@ -42,9 +42,9 @@
             "type": "package",
             "package": {
                 "name": "simplemachines/smf-russian",
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "dist": {
-                    "url": "https://download.simplemachines.org/index.php/smf_2-1-0_russian.zip",
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-1_russian.zip",
                     "type": "zip"
                 }
             }
