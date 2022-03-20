@@ -2,7 +2,7 @@
     "name": "bugo/smf-russian",
     "description": "A tool to get a fresh SMF build with Russian localization and some tweaks.",
     "type": "package",
-    "keywords": ["SMF Russian"],
+    "keywords": ["forum engine", "SMF Russian"],
     "homepage": "https://github.com/dragomano/SMF-Russian",
     "license": "MIT",
     "authors": [
@@ -44,7 +44,7 @@
                 "name": "simplemachines/smf-russian",
                 "version": "2.1.1",
                 "dist": {
-                    "url": "https://download.simplemachines.org/index.php/smf_2-1-1_russian.zip",
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-1_language-russian.zip",
                     "type": "zip"
                 }
             }
