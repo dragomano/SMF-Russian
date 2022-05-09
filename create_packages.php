@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -15,5 +15,5 @@ try {
         ->saveAsFile('smf21_rus_upgrade.zip')
         ->close();
 } catch(\PhpZip\Exception\ZipException $e) {
-    file_put_contents('error.log', $e->getMessage());
+    file_put_contents(__DIR__ . '/error.log', $e->getMessage());
 }

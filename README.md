@@ -1,11 +1,10 @@
 
 # SMF Russian ~ сборка SMF для русскоязычных пользователей
 
-## Изменения по сравнению с оригинальной версией SMF 2.1.1
+## Изменения по сравнению с оригинальной версией SMF 2.1.2
 
 * Локализация включена в дистрибутив.
 * Переведен `readme.html` (полезно почитать перед установкой или обновлением).
-* При нажатии на пункт «Личные сообщения» в меню в дополнение к пункту «Входящие» [добавлен пункт «Отправленные»](https://www.simplemachines.org/community/index.php?topic=580740.0).
 
 При установке с нуля добавлены следующие твики:
 * Включено по умолчанию
@@ -13,29 +12,24 @@
 * Отключено по умолчанию
     * Сбор статистики.
     * Отображение заголовков отдельных сообщений в темах.
+    * Проверка пароля при входе в админку.
 * Поле профиля «ICQ» заменено на «Telegram», с соответствующей иконкой.
 * Первый день недели в Календаре: Понедельник
 
 Прочее:
 * Скрипт SCEditor обновляется до текущей последней версии.
 * Скрипт jQuery обновляется до текущей последней версии.
-* Исправлен [баг с отображением номеров страниц разделов](https://github.com/SimpleMachines/SMF2.1/issues/7373).
 
-Если какие-то твики не нужны, внесите изменения в директории `tweaks` и/или в файле `webpack.mix.js`.
+Если какие-то твики не нужны, внесите соответствующие изменения.
 
 ## Твики
 
-| Твик  | Расположение в папке `tweaks` |
+| Твик | Расположение |
 | ------------- | ------------- |
-| Пункт «Отправленные» в ЛС | `Themes/default/PersonalMessage.template.php`, `webpack.mix.js` |
-| Отображение часовых поясов | `install_2-1_mysql.sql`, `install_2-1_postgresql.sql` |
-| Отключение сбора статистики | `install.php` |
-| Отображение заголовков сообщений | `install_2-1_mysql.sql`, `install_2-1_postgresql.sql` |
-| Замена иконки «ICQ» на «Telegram» | `Themes/default/images/telegram-icon.png`, `Themes/default/languages/Modification.english.php`, `Themes/default/languages/Modification.russian.php`, `install_2-1_mysql.sql`, `install_2-1_postgresql.sql` |
-| Первый день недели - Понедельник | `install_2-1_mysql.sql`, `install_2-1_postgresql.sql` |
+| Замена иконки «ICQ» на «Telegram» | `tweaks/Themes/default/images/telegram-icon.png`, `tweaks/Themes/default/languages/Modification.english.php`, `tweaks/Themes/default/languages/Modification.russian.php`, `apply_tweaks.php` |
 | Обновление SCEditor | `webpack.mix.js` |
 | Обновление jQuery | `webpack.mix.js` |
-| Исправление бага с отображением номеров страниц разделов | `Sources/Subs.php`, `webpack.mix.js` |
+| Другие твики | `apply_tweaks.php` |
 
 ## Запуск
 

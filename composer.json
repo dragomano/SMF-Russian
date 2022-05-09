@@ -2,7 +2,7 @@
     "name": "bugo/smf-russian",
     "description": "A tool to get a fresh SMF build with Russian localization and some tweaks.",
     "type": "package",
-    "keywords": ["forum engine", "SMF Russian"],
+    "keywords": ["forum engine", "smf russian"],
     "homepage": "https://github.com/dragomano/SMF-Russian",
     "license": "MIT",
     "authors": [
@@ -20,9 +20,9 @@
             "type": "package",
             "package": {
                 "name": "simplemachines/smf-install",
-                "version": "2.1.1",
+                "version": "2.1.2",
                 "dist": {
-                    "url": "https://download.simplemachines.org/index.php/smf_2-1-1_install.zip",
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-2_install.zip",
                     "type": "zip"
                 }
             }
@@ -31,9 +31,9 @@
             "type": "package",
             "package": {
                 "name": "simplemachines/smf-upgrade",
-                "version": "2.1.1",
+                "version": "2.1.2",
                 "dist": {
-                    "url": "https://download.simplemachines.org/index.php/smf_2-1-1_upgrade.zip",
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-2_upgrade.zip",
                     "type": "zip"
                 }
             }
@@ -42,9 +42,9 @@
             "type": "package",
             "package": {
                 "name": "simplemachines/smf-russian",
-                "version": "2.1.1",
+                "version": "2.1.2",
                 "dist": {
-                    "url": "https://download.simplemachines.org/index.php/smf_2-1-1_language-russian.zip",
+                    "url": "https://download.simplemachines.org/index.php/smf_2-1-2_language-russian.zip",
                     "type": "zip"
                 }
             }
@@ -60,6 +60,7 @@
         "post-install-cmd": [
             "npm install",
             "npx mix",
+            "@php apply_tweaks.php",
             "@php create_packages.php"
         ],
         "post-update-cmd": [
