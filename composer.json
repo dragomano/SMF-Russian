@@ -64,7 +64,10 @@
             "@php create_packages.php"
         ],
         "post-update-cmd": [
-            "composer run-script post-install-cmd"
+            "npm update",
+            "npx mix",
+            "@php apply_tweaks.php",
+            "@php create_packages.php"
         ]
     },
     "prefer-stable": true
