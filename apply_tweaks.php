@@ -41,3 +41,34 @@ $pgsql = file_get_contents(__DIR__ . '/dist_install/install_2-1_postgresql.sql')
 $pgsql = strtr($pgsql, $tweaks);
 
 file_put_contents(__DIR__ . '/dist_install/install_2-1_postgresql.sql', $pgsql);
+
+// Твики в Sources
+$calendar = file_get_contents(__DIR__ . '/dist_install/Sources/Subs-Calendar.php');
+$calendar = strtr($calendar, array(
+	"hr: \"' . \$txt['hour_short'] . '\"," => "hr: \"' . \$txt['hour_short'] . '\",
+	hrs: \"' . \$txt['hours_short'] . '\",",
+	"// Find all possible variants of AM and PM for this language." => "// Find all possible variants of AM and PM for this language.
+	if (\$txt['time_am'] == ' ' && \$txt['time_pm'] == ' ')
+	{
+		return strtr(strtolower(\$date), \$replacements);
+	}"
+));
+
+file_put_contents(__DIR__ . '/dist_install/Sources/Subs-Calendar.php', $calendar);
+
+// Твики в Themes
+$calendar_template = file_get_contents(__DIR__ . '/dist_install/Themes/default/Calendar.template.php');
+$calendar_template = strtr($calendar_template, array(
+	"\$context['event']['start_date_orig']" => "\$context['event']['start_date']",
+	"\$context['event']['end_date_orig']" => "\$context['event']['end_date']"
+));
+
+file_put_contents(__DIR__ . '/dist_install/Themes/default/Calendar.template.php', $calendar_template);
+
+$post_template = file_get_contents(__DIR__ . '/dist_install/Themes/default/Post.template.php');
+$post_template = strtr($post_template, array(
+	"\$context['event']['start_date_orig']" => "\$context['event']['start_date']",
+	"\$context['event']['end_date_orig']" => "\$context['event']['end_date']"
+));
+
+file_put_contents(__DIR__ . '/dist_install/Themes/default/Post.template.php', $post_template);
