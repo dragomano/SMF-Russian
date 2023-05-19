@@ -28,6 +28,11 @@ $tweaks = array(
 
 	// Отключаем получение файлов с офсайта - когда захотите обновиться, включите обратно, в Диспетчере задач
 	"0, 'fetchSMfiles" => "1, 'fetchSMfiles",
+
+	// Увеличиваем максимальные размеры вложений, заданные по умолчанию
+	"('attachmentSizeLimit', '128'),
+	('attachmentPostLimit', '192')," => "('attachmentSizeLimit', '1280'),
+	('attachmentPostLimit', '1920'),"
 );
 
 // MySQL
