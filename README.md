@@ -16,10 +16,10 @@
 * Поле профиля «ICQ» заменено на «Telegram», с соответствующей иконкой.
 * Первый день недели в Календаре: «Понедельник».
 * Исправлена ошибка «Неправильная дата» при создании событий в Календаре.
+* Увеличены максимальные размеры вложений, заданные по умолчанию.
 
 Прочее:
-* Автоматическое обновление скрипта SCEditor до текущей последней версии.
-* Автоматическое обновление скрипта jQuery до текущей последней версии.
+* Автоматическое обновление скрипта jQuery до текущей последней версии при сборке проекта.
 
 Если какие-то твики не нужны, внесите соответствующие изменения.
 
@@ -28,14 +28,13 @@
 | Твик | Расположение |
 | ------------- | ------------- |
 | Замена иконки «ICQ» на «Telegram» | `tweaks/Themes/default/images/telegram-icon.png`, `tweaks/Themes/default/languages/Modification.english.php`, `tweaks/Themes/default/languages/Modification.russian.php`, `apply_tweaks.php` |
-| Обновление SCEditor | `webpack.mix.js` |
 | Обновление jQuery | `webpack.mix.js` |
-| Исправление ошибки с неправильной датой в Календаре | `tweaks/Themes/Calendar.template.php`, `tweaks/Themes/Post.template.php`, `tweaks/Sources/Subs-Calendar.php` |
+| Исправление ошибки с неправильной датой в Календаре | `apply_tweaks` |
 | Другие твики | `apply_tweaks.php` |
 
 ## Запуск
 
-У вас в системе должны быть установлены [Composer](https://getcomposer.org/download/) и [Node.js](https://nodejs.org/en/).
+У вас в системе должны быть установлены свежие [Composer](https://getcomposer.org/download/) и [Node.js](https://nodejs.org/en/).
 
 Скачайте этот репозиторий (кнопка Code -> Download), распакуйте, откройте командную строку, перейдите в распакованную директорию и выполните команду `composer install`.
 
