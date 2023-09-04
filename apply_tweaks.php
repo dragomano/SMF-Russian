@@ -11,7 +11,7 @@ $tweaks = array(
 	// Отключаем проверку пароля при входе в админку
 	// Сортируем часовые пояса
 	// Отключаем отображение заголовков сообщений
-	// Подгружаем локальный jQuery вместо CDN
+	// Используем локальную версию jQuery
 	"('securityDisable_moderate', '1')" => "('securityDisable_moderate', '1'),
 	('securityDisable', '1'),
 	('timezone_priority_countries', 'RU'),
@@ -50,8 +50,6 @@ file_put_contents(__DIR__ . '/dist_install/install_2-1_postgresql.sql', $pgsql);
 // Твики в Sources
 $calendar = file_get_contents(__DIR__ . '/dist_install/Sources/Subs-Calendar.php');
 $calendar = strtr($calendar, array(
-	"hr: \"' . \$txt['hour_short'] . '\"," => "hr: \"' . \$txt['hour_short'] . '\",
-	hrs: \"' . \$txt['hours_short'] . '\",",
 	"// Find all possible variants of AM and PM for this language." => "// Find all possible variants of AM and PM for this language.
 	if (\$txt['time_am'] == ' ' && \$txt['time_pm'] == ' ')
 	{
