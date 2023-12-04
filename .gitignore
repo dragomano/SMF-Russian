@@ -1,8 +1,5 @@
 vendor/
-node_modules/
-mix-manifest.json
-*.lock
-package-lock.json
 dist_install/
 dist_upgrade/
+*.lock
 *.zip

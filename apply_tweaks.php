@@ -1,10 +1,12 @@
 <?php
 
+$basePath = __DIR__ . '/dist_install';
+
 // Отключаем сбор статистики по умолчанию
-$install = file_get_contents(__DIR__ . '/dist_install/install.php');
+$install = file_get_contents($basePath . '/install.php');
 $install = str_replace('name="stats" id="stats_check" checked="checked"', 'name="stats" id="stats_check"', $install);
 
-file_put_contents(__DIR__ . '/dist_install/install.php', $install);
+file_put_contents($basePath . '/install.php', $install);
 
 // Твики в SQL файлах
 $tweaks = array(
@@ -36,19 +38,19 @@ $tweaks = array(
 );
 
 // MySQL
-$mysql = file_get_contents(__DIR__ . '/dist_install/install_2-1_mysql.sql');
+$mysql = file_get_contents($basePath . '/install_2-1_mysql.sql');
 $mysql = strtr($mysql, $tweaks);
 
-file_put_contents(__DIR__ . '/dist_install/install_2-1_mysql.sql', $mysql);
+file_put_contents($basePath . '/install_2-1_mysql.sql', $mysql);
 
 // PostreSQL
-$pgsql = file_get_contents(__DIR__ . '/dist_install/install_2-1_postgresql.sql');
+$pgsql = file_get_contents($basePath . '/install_2-1_postgresql.sql');
 $pgsql = strtr($pgsql, $tweaks);
 
-file_put_contents(__DIR__ . '/dist_install/install_2-1_postgresql.sql', $pgsql);
+file_put_contents($basePath . '/install_2-1_postgresql.sql', $pgsql);
 
 // Твики в Sources
-$calendar = file_get_contents(__DIR__ . '/dist_install/Sources/Subs-Calendar.php');
+$calendar = file_get_contents($basePath . '/Sources/Subs-Calendar.php');
 $calendar = strtr($calendar, array(
 	"// Find all possible variants of AM and PM for this language." => "// Find all possible variants of AM and PM for this language.
 	if (\$txt['time_am'] == ' ' && \$txt['time_pm'] == ' ')
@@ -57,21 +59,21 @@ $calendar = strtr($calendar, array(
 	}"
 ));
 
-file_put_contents(__DIR__ . '/dist_install/Sources/Subs-Calendar.php', $calendar);
+file_put_contents($basePath . '/Sources/Subs-Calendar.php', $calendar);
 
 // Твики в Themes
-$calendar_template = file_get_contents(__DIR__ . '/dist_install/Themes/default/Calendar.template.php');
+$calendar_template = file_get_contents($basePath . '/Themes/default/Calendar.template.php');
 $calendar_template = strtr($calendar_template, array(
 	"\$context['event']['start_date_orig']" => "\$context['event']['start_date']",
 	"\$context['event']['end_date_orig']" => "\$context['event']['end_date']"
 ));
 
-file_put_contents(__DIR__ . '/dist_install/Themes/default/Calendar.template.php', $calendar_template);
+file_put_contents($basePath . '/Themes/default/Calendar.template.php', $calendar_template);
 
-$post_template = file_get_contents(__DIR__ . '/dist_install/Themes/default/Post.template.php');
+$post_template = file_get_contents($basePath . '/Themes/default/Post.template.php');
 $post_template = strtr($post_template, array(
 	"\$context['event']['start_date_orig']" => "\$context['event']['start_date']",
 	"\$context['event']['end_date_orig']" => "\$context['event']['end_date']"
 ));
 
-file_put_contents(__DIR__ . '/dist_install/Themes/default/Post.template.php', $post_template);
+file_put_contents($basePath . '/Themes/default/Post.template.php', $post_template);

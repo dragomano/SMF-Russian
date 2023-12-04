@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="SMF Russian" default="build">
+  <target name="build">
+    <delete file="./smf21_rus_install.zip" quiet="true" />
+    <zip destfile="./smf21_rus_install.zip">
+      <fileset dir="./dist_install">
+        <include name="**" />
+      </fileset>
+    </zip>
+    <delete file="./smf21_rus_upgrade.zip" quiet="true" />
+    <zip destfile="./smf21_rus_upgrade.zip">
+      <fileset dir="./dist_upgrade">
+        <include name="**" />
+      </fileset>
+    </zip>
+  </target>
+</project>
