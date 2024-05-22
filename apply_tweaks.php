@@ -34,7 +34,7 @@ $tweaks = array(
 	// Увеличиваем максимальные размеры вложений, заданные по умолчанию
 	"('attachmentSizeLimit', '128'),
 	('attachmentPostLimit', '192')," => "('attachmentSizeLimit', '1280'),
-	('attachmentPostLimit', '1920'),"
+	('attachmentPostLimit', '1920'),",
 );
 
 // MySQL
@@ -53,7 +53,7 @@ file_put_contents($basePath . '/install_2-1_postgresql.sql', $pgsql);
 $calendar = file_get_contents($basePath . '/Sources/Subs-Calendar.php');
 $calendar = strtr($calendar, array(
 	"// Find all possible variants of AM and PM for this language." => "// Find all possible variants of AM and PM for this language.
-	if (\$txt['time_am'] == ' ' && \$txt['time_pm'] == ' ')
+	if (trim(\$txt['time_am']) === '' && trim(\$txt['time_pm']) === '')
 	{
 		return strtr(strtolower(\$date), \$replacements);
 	}"
@@ -61,19 +61,19 @@ $calendar = strtr($calendar, array(
 
 file_put_contents($basePath . '/Sources/Subs-Calendar.php', $calendar);
 
-// Твики в Themes
+// Решаем проблему с неправильной датой при создании событий
 $calendar_template = file_get_contents($basePath . '/Themes/default/Calendar.template.php');
 $calendar_template = strtr($calendar_template, array(
-	"\$context['event']['start_date_orig']" => "\$context['event']['start_date']",
-	"\$context['event']['end_date_orig']" => "\$context['event']['end_date']"
+	"trim(\$context['event']['start_date_orig'])" => "trim(\$context['event']['start_date'])",
+	"trim(\$context['event']['end_date_orig'])" => "trim(\$context['event']['end_date'])",
 ));
 
 file_put_contents($basePath . '/Themes/default/Calendar.template.php', $calendar_template);
 
 $post_template = file_get_contents($basePath . '/Themes/default/Post.template.php');
 $post_template = strtr($post_template, array(
-	"\$context['event']['start_date_orig']" => "\$context['event']['start_date']",
-	"\$context['event']['end_date_orig']" => "\$context['event']['end_date']"
+	"trim(\$context['event']['start_date_orig'])" => "trim(\$context['event']['start_date'])",
+	"trim(\$context['event']['end_date_orig'])" => "trim(\$context['event']['end_date'])",
 ));
 
 file_put_contents($basePath . '/Themes/default/Post.template.php', $post_template);
