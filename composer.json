@@ -23,9 +23,9 @@
       "type": "package",
       "package": {
         "name": "simplemachines/smf-install",
-        "version": "2.1.4",
+        "version": "2.1.6",
         "dist": {
-          "url": "https://download.simplemachines.org/index.php/smf_2-1-4_install.zip",
+          "url": "https://download.simplemachines.org/index.php/smf_2-1-6_install.zip",
           "type": "zip"
         }
       }
@@ -34,9 +34,9 @@
       "type": "package",
       "package": {
         "name": "simplemachines/smf-upgrade",
-        "version": "2.1.4",
+        "version": "2.1.6",
         "dist": {
-          "url": "https://download.simplemachines.org/index.php/smf_2-1-4_upgrade.zip",
+          "url": "https://download.simplemachines.org/index.php/smf_2-1-6_upgrade.zip",
           "type": "zip"
         }
       }
@@ -45,9 +45,9 @@
       "type": "package",
       "package": {
         "name": "simplemachines/smf-russian",
-        "version": "2.1.4",
+        "version": "2.1.6",
         "dist": {
-          "url": "https://download.simplemachines.org/index.php/smf_2-1-4_language-russian.zip",
+          "url": "https://download.simplemachines.org/index.php/smf_2-1-6_language-russian.zip",
           "type": "zip"
         }
       }
@@ -57,9 +57,8 @@
     "simplemachines/smf-install": "^2.1",
     "simplemachines/smf-upgrade": "^2.1",
     "simplemachines/smf-russian": "^2.1",
-    "phing/phing": "3.*"
+    "phing/phing": "^3.0"
   },
-  "minimum-stability": "alpha",
   "scripts": {
     "post-install-cmd": [
       "@php copy_files.php",
