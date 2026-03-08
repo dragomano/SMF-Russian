@@ -1,52 +1,23 @@
 <?php
 
+$base = __DIR__;
+$vendor = "$base/vendor/simplemachines";
+
 $targets = [
-	[
-		'src' => __DIR__ . '/vendor/simplemachines/smf-install',
-		'dest' =>  __DIR__ . '/dist_install',
-	],
-	[
-		'src' => __DIR__ . '/vendor/simplemachines/smf-russian',
-		'dest' =>  __DIR__ . '/dist_install',
-	],
-	[
-		'src' => __DIR__ . '/vendor/simplemachines/smf-upgrade',
-		'dest' =>  __DIR__ . '/dist_upgrade',
-	],
-	[
-		'src' => __DIR__ . '/vendor/simplemachines/smf-russian',
-		'dest' =>  __DIR__ . '/dist_upgrade',
-	],
-	[
-		'src' => __DIR__ . '/tweaks',
-		'dest' =>  __DIR__ . '/dist_install',
-	],
-	[
-		'src' => __DIR__ . '/tweaks/readme.html',
-		'dest' => __DIR__ . '/dist_upgrade/readme.html',
-	],
+	["$vendor/smf-install", "$base/dist_install"],
+	["$vendor/smf-russian", "$base/dist_install"],
+	["$vendor/smf-upgrade", "$base/dist_upgrade"],
+	["$vendor/smf-russian", "$base/dist_upgrade"],
+	["$base/tweaks", "$base/dist_install"],
+	["$base/tweaks/readme.html", "$base/dist_upgrade/readme.html"],
 ];
 
-function copyFiles($targets) {
-	foreach ($targets as $target) {
-		$src = $target['src'];
-		$dest = $target['dest'];
-
+function copyFiles(array $targets): void {
+	foreach ($targets as [$src, $dest]) {
 		if (is_dir($src)) {
-			if (!is_dir($dest)) {
-				mkdir($dest, 0777, true);
-			}
-
-			$files = scandir($src);
-
-			foreach ($files as $file) {
-				if ($file !== '.' && $file !== '..') {
-					if (is_dir($src . '/' . $file)) {
-						copyFiles([['src' => $src . '/' . $file, 'dest' => $dest . '/' . $file]]);
-					} else {
-						copy($src . '/' . $file, $dest . '/' . $file);
-					}
-				}
+			is_dir($dest) || mkdir($dest, 0777, true);
+			foreach (array_diff(scandir($src), ['.', '..']) as $file) {
+				copyFiles([["$src/$file", "$dest/$file"]]);
 			}
 		} else {
 			copy($src, $dest);
