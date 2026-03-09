@@ -48,3 +48,16 @@ $pgsql = file_get_contents($basePath . '/install_2-1_postgresql.sql');
 $pgsql = strtr($pgsql, $tweaks);
 
 file_put_contents($basePath . '/install_2-1_postgresql.sql', $pgsql);
+
+// Твики в Sources
+$calendar = file_get_contents($basePath . '/Sources/Subs-Calendar.php');
+$calendar = strtr($calendar, array(
+	"// Find all possible variants of AM and PM for this language." => "// Find all possible variants of AM and PM for this language.
+	if (trim(\$txt['time_am']) === '' && trim(\$txt['time_pm']) === '')
+	{
+		return strtr(strtolower(\$date), \$replacements);
+	}"
+));
+
+// Решаем проблему с неправильной датой при создании событий
+file_put_contents($basePath . '/Sources/Subs-Calendar.php', $calendar);
