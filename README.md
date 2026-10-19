@@ -30,6 +30,18 @@
 | Исправление ошибки с неправильной датой в Календаре | `apply_tweaks.php` |
 | Другие твики | `apply_tweaks.php` |
 
+### Необходимые файлы (папка `packages`)
+
+Сервер `download.simplemachines.org` отдаёт файлы только «настоящим» браузерам (защита от автоматических запросов), поэтому Composer скачать их сам не может. Скачайте следующие архивы через браузер и положите их в папку `packages` (она создаётся вручную, в Git не входит):
+
+* [smf_2-1-8_install.zip](https://download.simplemachines.org/index.php/smf_2-1-8_install.zip)
+* [smf_2-1-8_upgrade.zip](https://download.simplemachines.org/index.php/smf_2-1-8_upgrade.zip)
+* [smf_2-1-8_language-russian.zip](https://download.simplemachines.org/index.php/smf_2-1-8_language-russian.zip)
+
+Логин на сайте Simple Machines для этого не требуется — просто откройте ссылки в браузере.
+
+При выходе новой версии SMF скачайте новые архивы, положите их в `packages` и обновите имена файлов и версию в `composer.json`.
+
 ## Запуск
 
 У вас в системе должна быть установлена свежая версия [Composer](https://getcomposer.org/download/).

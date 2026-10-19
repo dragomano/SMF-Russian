@@ -25,7 +25,7 @@
         "name": "simplemachines/smf-install",
         "version": "2.1.8",
         "dist": {
-          "url": "https://download.simplemachines.org/index.php/smf_2-1-8_install.zip",
+          "url": "packages/smf_2-1-8_install.zip",
           "type": "zip"
         }
       }
@@ -36,7 +36,7 @@
         "name": "simplemachines/smf-upgrade",
         "version": "2.1.8",
         "dist": {
-          "url": "https://download.simplemachines.org/index.php/smf_2-1-8_upgrade.zip",
+          "url": "packages/smf_2-1-8_upgrade.zip",
           "type": "zip"
         }
       }
@@ -47,7 +47,7 @@
         "name": "simplemachines/smf-russian",
         "version": "2.1.8",
         "dist": {
-          "url": "https://download.simplemachines.org/index.php/smf_2-1-8_language-russian.zip",
+          "url": "packages/smf_2-1-8_language-russian.zip",
           "type": "zip"
         }
       }
